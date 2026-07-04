@@ -31,9 +31,13 @@ config = {
 # ------------------------
 # YAML
 # ------------------------
+from pathlib import Path
 
-if os.path.exists("config.development.yaml"):
-    with open("config.development.yaml") as f:
+BASE_DIR = Path(__file__).resolve().parent.parent
+yaml_file = BASE_DIR / "config.development.yaml"
+
+if yaml_file.exists():
+    with open(yaml_file) as f:
         y = yaml.safe_load(f)
         if y:
             config.update(y)
